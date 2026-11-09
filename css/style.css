@@ -1,0 +1,1726 @@
+
+/* BeauStock - Main Design */
+
+:root {
+    --ivory: #F8F5F0;
+    --beige: #E8DED2;
+    --taupe: #A99583;
+    --brown: #665347;
+    --charcoal: #37332F;
+    --white: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--charcoal);
+}
+
+/* Login Page */
+
+.login-page {
+    min-height: 100vh;
+    background: var(--ivory);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 1050px;
+    min-height: 600px;
+    background: var(--white);
+    border-radius: 18px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    box-shadow: 0 15px 45px rgba(55, 51, 47, 0.08);
+}
+
+.login-brand {
+    background: var(--beige);
+    padding: 65px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-icon {
+    width: 58px;
+    height: 58px;
+    border: 1px solid var(--brown);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    margin-bottom: 40px;
+}
+
+.login-logo {
+    width: 120px;           
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 20px;   
+}
+
+.brand-label,
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color: var(--brown);
+}
+
+.login-brand h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(42px, 5vw, 62px);
+    margin: 10px 0 20px;
+}
+
+.brand-description {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    line-height: 1.7;
+    color: var(--brown);
+}
+
+.brand-decoration {
+    position: absolute;
+    bottom: -12px;
+    right: 15px;
+    font-size: 200px;
+    color: rgba(133, 41, 41, 0.08);
+}
+
+.login-form-section {
+    padding: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 360px;
+}
+
+.login-form h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px;
+    margin: 12px 0;
+}
+
+.form-description {
+    color: #827970;
+    font-size: 14px;
+    margin-bottom: 35px;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-control {
+    min-height: 46px;
+    border-color: #E4DED7;
+    border-radius: 8px;
+    font-size: 13px;
+    padding: 12px;
+}
+
+.form-control:focus {
+    border-color: var(--taupe);
+    box-shadow: 0 0 0 3px rgba(169, 149, 131, 0.15);
+}
+
+.login-button {
+    min-height: 46px;
+    background: var(--charcoal);
+    color: var(--white);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.login-button:hover {
+    background: var(--brown);
+    color: var(--white);
+}
+
+.login-message {
+    font-size: 13px;
+    color: #B42318;
+}
+
+.login-note {
+    text-align: center;
+    margin-top: 28px;
+    color: #948A80;
+    font-size: 12px;
+}
+
+/* Mobile Responsive Design */
+
+@media (max-width: 768px) {
+    .login-page {
+        padding: 15px;
+    }
+
+    .login-container {
+        grid-template-columns: 1fr;
+    }
+
+    .login-brand {
+        padding: 35px 30px;
+    }
+
+    .login-brand h1 {
+        font-size: 42px;
+    }
+
+    .brand-description {
+        font-size: 17px;
+        margin-bottom: 0;
+    }
+
+    .brand-decoration {
+        font-size: 120px;
+        bottom: -35px;
+    }
+
+    .login-form-section {
+        padding: 40px 28px;
+    }
+}
+
+
+/* ==========================================================================================
+   BeauStock Dashboard
+   ========================================================================================== */
+
+.dashboard-page {
+    background: #F8F5F0 url("../images/plaid_tile.png") top left / 52px 52px repeat;
+    min-height: 100vh;
+}
+
+.app-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {  
+    width: 245px;
+    flex-shrink: 0;
+    background: #FFFFFF;
+    border-right: 1px solid #EAE4DC;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #37332F;
+    font-family: Georgia, serif;
+    font-size: 20px;
+    text-decoration: none;
+    margin-bottom: 48px;
+}
+
+.brand-mark {
+    width: 39px;
+    height: 39px;
+    border: 1px solid #A99583;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.brand-logo-img {
+    width: 90px;            
+    height: 90px;
+    object-fit: contain; 
+}  
+
+.sidebar-label {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #A59A8F;
+    font-weight: bold;
+    padding-left: 12px;
+    margin-bottom: 15px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #766C63;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.nav-item span {
+    width: 20px;
+    text-align: center;
+    font-size: 17px;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: #F0E9E1;
+    color: #514237;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding: 25px 10px 0;
+    color: #8D8176;
+    font-size: 10px;
+    letter-spacing: 1px;
+}
+
+.sidebar-bottom small {
+    display: block;
+    letter-spacing: 0;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: #766C63;
+    padding: 18px 0 0;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.dashboard-main {
+    flex: 1;
+    min-width: 0;
+    padding: 35px 40px 20px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.topbar .eyebrow {
+    margin-bottom: 7px;
+    font-size: 10px;
+}
+
+.topbar h1 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    margin: 0;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #fcf6ed;
+    color: #7a6959;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-profile strong,
+.user-profile small {
+    display: block;
+}
+
+.user-profile strong {
+    font-size: 12px;
+}
+
+.user-profile small {
+    font-size: 10px;
+    color: #93877C;
+    margin-top: 4px;
+}
+
+.welcome-section {
+    background: #d5c6b6;
+    border-radius: 12px;
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.welcome-label {
+    color: #785353;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.welcome-section h2 {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    margin: 10px 0;
+}
+
+.welcome-section p:last-child {
+    color: #786666;
+    font-size: 12px;
+    margin-bottom: 0;
+}
+
+.welcome-decoration {
+    color: rgba(102, 83, 71, 0.2);
+    font-size: 95px;
+    padding-right: 15px;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.summary-card,
+.dashboard-panel {
+    background: #FFFFFF;
+    border: 1px solid #ecdfdf;
+    border-radius: 12px;
+}
+
+.summary-card {
+    padding: 20px;
+}
+
+.summary-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #826d6d;
+    font-size: 12px;
+    gap: 6px;
+}
+
+.summary-icon {
+    background: #F2ECE5;
+    color: #665347;
+    width: 34px;
+    height: 34px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.alert-icon {
+    color: #A15D35;
+    background: #F8E9DE;
+    font-weight: bold;
+}
+
+.summary-card h3 {
+    font-family: Georgia, serif;
+    font-size: 27px;
+    margin: 18px 0 6px;
+    overflow-wrap: anywhere;
+}
+
+.summary-card p {
+    color: #9A9086;
+    font-size: 11px;
+    margin: 0;
+}
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.dashboard-panel {
+    padding: 23px;
+    min-width: 0;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.panel-heading h3 {
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin: 0 0 7px;
+}
+
+.panel-heading p {
+    color: #9A9086;
+    font-size: 11px;
+    margin: 0;
+}
+
+.panel-tag {
+    color: #8C7A68;
+    background: #F3EEE8;
+    border-radius: 5px;
+    padding: 6px 8px;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.chart-container {
+    height: 240px;
+    position: relative;
+}
+
+.alert-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 0;
+    border-bottom: 1px solid #F0ECE7;
+}
+
+.alert-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.alert-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #B76D4B;
+    flex-shrink: 0;
+}
+
+.expiry-dot {
+    background: #C29A55;
+}
+
+.alert-item div {
+    flex: 1;
+    min-width: 0;
+}
+
+.alert-item strong {
+    display: block;
+    font-size: 11px;
+}
+
+.alert-item p {
+    color: #94887D;
+    font-size: 10px;
+    margin: 5px 0 0;
+}
+
+.alert-badge {
+    background: #F8E9E2;
+    color: #A65C3D;
+    padding: 5px 7px;
+    border-radius: 5px;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.expiry-badge {
+    background: #F6F0E0;
+    color: #9A7836;
+}
+
+.activity-panel {
+    margin-bottom: 25px;
+}
+
+.view-all-link {
+    color: #796552;
+    text-decoration: none;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.activity-table {
+    margin-bottom: 0;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.activity-table thead th {
+    color: #9A9086;
+    font-size: 9px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    padding: 13px 12px;
+    background: #FBF9F6;
+    border-bottom: 1px solid #ECE6DF;
+}
+
+.activity-table tbody td {
+    padding: 16px 12px;
+    color: #655C54;
+    border-bottom-color: #F0ECE7;
+}
+
+.activity-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 10px;
+}
+
+.received {
+    background: #E9F2E8;
+    color: #4F7850;
+}
+
+.sold {
+    background: #F3EEE7;
+    color: #7C6955;
+}
+
+.adjusted {
+    background: #F6F0E0;
+    color: #8B7138;
+}
+
+.dashboard-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    color: #A0968B;
+    font-size: 10px;
+    padding: 10px 0;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1100px) {
+    .dashboard-main {
+        padding: 28px 24px;
+    }
+
+    .sidebar {
+        width: 215px;
+    }
+
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dashboard-content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .app-layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        padding: 16px;
+        border-right: none;
+        border-bottom: 1px solid #EAE4DC;
+    }
+
+    .sidebar-brand {
+        margin-bottom: 20px;
+    }
+
+    .sidebar-label,
+    .sidebar-bottom {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .nav-item {
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 10px;
+    }
+
+    .nav-item span {
+        display: none;
+    }
+
+    .dashboard-main {
+        padding: 24px 15px;
+    }
+
+    .topbar h1 {
+        font-size: 27px;
+    }
+
+    .welcome-section {
+        padding: 23px 20px;
+    }
+
+    .welcome-section h2 {
+        font-size: 22px;
+    }
+
+    .welcome-decoration {
+        display: none;
+    }
+
+    .summary-grid {
+        gap: 10px;
+    }
+
+    .summary-card {
+        padding: 14px;
+    }
+
+    .summary-card h3 {
+        font-size: 23px;
+    }
+
+    .summary-top {
+        font-size: 11px;
+    }
+
+    .dashboard-panel {
+        padding: 17px;
+    }
+
+    .dashboard-footer {
+        flex-direction: column;
+    }
+}
+
+
+/* ==========================================================================================
+   BeauStock Product Management
+   ========================================================================================== */
+
+.product-summary-grid {
+    margin-top: 0;
+}
+
+.product-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.product-section-title {
+    font-family: Georgia, serif;
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.product-section-description {
+    color: #9A9086;
+    font-size: 12px;
+    margin: 0;
+}
+
+.add-product-button {
+    width: auto;
+    min-width: 140px;
+    padding: 12px 18px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.product-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.product-filters .form-control,
+.product-filters .form-select {
+    min-height: 44px;
+    font-size: 12px;
+    border-color: #E4DED7;
+}
+
+.product-table {
+    min-width: 950px;
+}
+
+.product-table thead th {
+    white-space: nowrap;
+}
+
+.product-table tbody td {
+    font-size: 11px;
+}
+
+.product-name-cell {
+    font-weight: 600;
+    color: #514237 !important;
+    min-width: 150px;
+}
+
+.product-sku {
+    color: #8C8075 !important;
+    font-size: 10px !important;
+}
+
+.category-badge {
+    display: inline-block;
+    background: #F2ECE5;
+    color: #786453;
+    padding: 6px 9px;
+    border-radius: 5px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.stock-badge {
+    display: inline-block;
+    border-radius: 5px;
+    padding: 6px 9px;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.stock-in {
+    color: #4F7850;
+    background: #E9F2E8;
+}
+
+.stock-low {
+    color: #986B2D;
+    background: #F6F0E0;
+}
+
+.stock-out {
+    color: #A3483F;
+    background: #F8E9E2;
+}
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-button {
+    border: 1px solid #E5DED6;
+    background: #FFFFFF;
+    color: #665347;
+    border-radius: 6px;
+    padding: 6px 9px;
+    font-size: 10px;
+}
+
+.action-button:hover {
+    background: #F2ECE5;
+}
+
+.delete-button {
+    color: #A3483F;
+}
+
+.delete-button:hover {
+    background: #F8E9E2;
+}
+
+.product-table-footer {
+    border-top: 1px solid #F0ECE7;
+    padding-top: 16px;
+    margin-top: 10px;
+    color: #94887D;
+    font-size: 11px;
+}
+
+.empty-message {
+    text-align: center;
+    color: #94887D;
+    font-size: 13px;
+    padding: 30px 10px;
+}
+
+.product-modal {
+    border: none;
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.product-modal .modal-header {
+    padding: 25px 28px 15px;
+    border-bottom: 1px solid #F0ECE7;
+}
+
+.product-modal .modal-title {
+    font-family: Georgia, serif;
+    font-size: 24px;
+}
+
+.product-modal .modal-body {
+    padding: 25px 28px;
+}
+
+.product-modal .modal-footer {
+    padding: 15px 28px 25px;
+    border-top: 1px solid #F0ECE7;
+}
+
+.product-modal .form-label {
+    font-size: 12px;
+}
+
+.product-modal .form-control,
+.product-modal .form-select {
+    font-size: 12px;
+    min-height: 43px;
+}
+
+.save-product-button {
+    width: auto;
+    padding: 10px 20px;
+    margin: 0;
+}
+
+.form-message {
+    color: #B42318;
+    font-size: 12px;
+    margin: 15px 0 0;
+}
+
+@media (max-width: 700px) {
+    .product-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .product-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .add-product-button {
+        width: 100%;
+    }
+
+    .product-modal .modal-header,
+    .product-modal .modal-body,
+    .product-modal .modal-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+
+
+/* ===== STOCK MANAGEMENT ===== */
+
+.stock-summary-grid {
+    margin-top: 0;
+}
+
+.stock-panel,
+.movement-panel {
+    margin-top: 24px;
+}
+
+.stock-badge,
+.movement-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.stock-healthy {
+    color: #426b50;
+    background: #e6f2e8;
+}
+
+.stock-low {
+    color: #956b25;
+    background: #fff1d6;
+}
+
+.stock-out {
+    color: #a33f3f;
+    background: #fbe6e4;
+}
+
+.movement-in {
+    color: #426b50;
+    background: #e6f2e8;
+}
+
+.movement-out {
+    color: #956b25;
+    background: #fff1d6;
+}
+
+.stock-modal-content {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+.stock-modal-content .modal-header {
+    padding: 24px 24px 16px;
+    border-bottom: 1px solid #eee8e2;
+}
+
+.stock-modal-content .modal-body {
+    padding: 20px 24px;
+}
+
+.stock-modal-content .modal-footer {
+    padding: 16px 24px 24px;
+    border-top: 1px solid #eee8e2;
+}
+
+.stock-modal-content .form-label {
+    color: #51473f;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.stock-modal-content .form-control,
+.stock-modal-content .form-select {
+    padding: 11px 12px;
+    border-color: #e4dcd4;
+    border-radius: 9px;
+    font-size: 13px;
+}
+
+.stock-modal-content .form-control:focus,
+.stock-modal-content .form-select:focus {
+    border-color: #a99583;
+    box-shadow: 0 0 0 3px rgba(169, 149, 131, 0.15);
+}
+
+.form-message {
+    color: #b42318;
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+#openStockModal:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .stock-summary-grid {
+        margin-top: 0;
+    }
+
+    .stock-panel,
+    .movement-panel {
+        margin-top: 18px;
+    }
+
+    .stock-modal-content .modal-header,
+    .stock-modal-content .modal-body,
+    .stock-modal-content .modal-footer {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+}
+
+
+
+
+/* ==========================================================================================
+   Shared page tools (stock, suppliers, reports)
+   ========================================================================================== */
+
+/* Panel heading with count + button on the right */
+.panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.record-count {
+    color: #8C7A68;
+    background: #F3EEE8;
+    border-radius: 5px;
+    padding: 6px 10px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+/* Search box + filter row */
+.table-filters {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 0 14px;
+    background: #FFFFFF;
+    border: 1px solid #E4DED7;
+    border-radius: 8px;
+    color: #A59A8F;
+}
+
+.search-wrapper:focus-within {
+    border-color: var(--taupe);
+    box-shadow: 0 0 0 3px rgba(169, 149, 131, 0.15);
+}
+
+.search-wrapper input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 12px;
+    color: var(--charcoal);
+    min-width: 0;
+}
+
+.filter-select {
+    min-height: 44px;
+    font-size: 12px;
+    border-color: #E4DED7;
+    border-radius: 8px;
+}
+
+.product-name-cell small {
+    display: block;
+    color: #A59A8F;
+    font-size: 10px;
+    font-weight: 400;
+    margin-top: 3px;
+}
+
+.stock-panel .product-table,
+.movement-panel .product-table {
+    min-width: 640px;
+}
+
+/* ===== Suppliers: card grid ===== */
+.supplier-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 16px;
+}
+
+.supplier-card {
+    background: #FBF9F6;
+    border: 1px solid #ECE6DF;
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.supplier-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(55, 51, 47, 0.07);
+}
+
+.supplier-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #E8DED2;
+    color: #665347;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+
+.supplier-card h4 {
+    font-family: Georgia, serif;
+    font-size: 16px;
+    margin: 0 0 4px;
+}
+
+.supplier-card .supplier-category {
+    color: #A59A8F;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+}
+
+.supplier-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 11px;
+    color: #766C63;
+}
+
+.supplier-card li {
+    padding: 4px 0;
+    overflow-wrap: anywhere;
+}
+
+/* Order status badges */
+.order-badge {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.order-pending   { color: #956b25; background: #fff1d6; }
+.order-shipped   { color: #5f5240; background: #EFE6DA; }
+.order-delivered { color: #426b50; background: #e6f2e8; }
+
+/* Make the brown button usable anywhere */
+.btn-brown {
+    background: var(--charcoal);
+    color: #fff;
+    border-radius: 8px;
+    min-height: 44px;
+    padding: 10px 18px;
+}
+
+.btn-brown:hover { background: var(--brown); color: #fff; }
+
+/* ===== Reports ===== */
+.report-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.alert-list-empty {
+    color: #94887D;
+    font-size: 12px;
+    padding: 18px 0 4px;
+}
+
+.alert-group-title {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #A59A8F;
+    font-weight: bold;
+    margin: 18px 0 2px;
+}
+
+.alert-group-title:first-of-type { margin-top: 0; }
+
+.critical-dot { background: #A3483F; }
+
+.critical-badge {
+    background: #F8E9E2;
+    color: #A3483F;
+}
+
+@media (max-width: 1100px) {
+    .report-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+    .table-filters { grid-template-columns: 1fr; }
+    .panel-actions { justify-content: flex-start; }
+    .panel-heading { flex-direction: column; }
+}
+
+
+/* ==========================================================================================
+   Mobile improvements
+   ========================================================================================== */
+
+@media (max-width: 700px) {
+
+    /* Keep the Log out button visible in the mobile menu */
+    .sidebar-bottom {
+        display: block;
+        padding: 12px 0 0;
+    }
+
+    .sidebar-bottom p,
+    .sidebar-bottom small {
+        display: none;
+    }
+
+    .logout-button {
+        width: 100%;
+        padding: 11px;
+        border: 1px solid #E4DED7;
+        border-radius: 8px;
+        background: #FBF9F6;
+        color: #665347;
+        font-size: 12px;
+    }
+
+    .logout-button:hover {
+        background: #F0E9E1;
+    }
+
+    /* Tables: drop less important columns instead of scrolling a lot */
+    .product-table,
+    .stock-panel .product-table,
+    .movement-panel .product-table {
+        min-width: 0;
+    }
+
+    .stock-panel .product-table,
+    .movement-panel .product-table {
+        min-width: 460px;
+    }
+
+    /* Products: hide SKU, Category, Expiry */
+    .products-table th:nth-child(2), .products-table td:nth-child(2),
+    .products-table th:nth-child(3), .products-table td:nth-child(3),
+    .products-table th:nth-child(6), .products-table td:nth-child(6) {
+        display: none;
+    }
+
+    /* Orders: hide Supplier, Date */
+    .orders-table th:nth-child(2), .orders-table td:nth-child(2),
+    .orders-table th:nth-child(6), .orders-table td:nth-child(6) {
+        display: none;
+    }
+
+    /* Reports value table: hide Category, Cost value */
+    .values-table th:nth-child(2), .values-table td:nth-child(2),
+    .values-table th:nth-child(4), .values-table td:nth-child(4) {
+        display: none;
+    }
+
+    .product-table tbody td,
+    .product-table thead th {
+        padding: 12px 8px;
+    }
+}
+
+/* Very small phones: one summary card per row */
+@media (max-width: 400px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .supplier-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================================
+   DARK MODE (applies only when <html data-theme="dark">)
+   ========================================================================================== */
+
+/* The toggle button (also visible in light mode) */
+.theme-toggle {
+    width: 100%;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    padding: 10px;
+    border: 1px solid #E4DED7;
+    border-radius: 8px;
+    background: #FBF9F6;
+    color: #665347;
+    font-size: 12px;
+    cursor: pointer;
+}
+.theme-toggle:hover { background: #F0E9E1; }
+
+/* Page background. Copy YOUR light rule here but use a dark overlay colour */
+[data-theme="dark"] .dashboard-page {
+    background:
+        linear-gradient(rgba(27, 24, 21, 0.85), rgba(27, 24, 21, 0.85)),
+        url("../images/plaid_tile.png") top left / 52px 52px repeat;
+}
+
+[data-theme="dark"] body { color: #EDE6DE; }
+
+/* Sidebar */
+[data-theme="dark"] .sidebar { background: #27221E; border-color: #3A332D; }
+[data-theme="dark"] .sidebar-brand { color: #F3EDE6; }
+[data-theme="dark"] .nav-item { color: #B5A99C; }
+[data-theme="dark"] .nav-item:hover,
+[data-theme="dark"] .nav-item.active { background: #3A322B; color: #F3EDE6; }
+[data-theme="dark"] .sidebar-bottom,
+[data-theme="dark"] .logout-button { color: #B5A99C; }
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .logout-button { border-color: #3A332D; background: #2E2823; color: #D8BFA8; }
+
+/* Headings and small text */
+[data-theme="dark"] .eyebrow,
+[data-theme="dark"] .welcome-label { color: #D8BFA8; }
+[data-theme="dark"] .user-profile small,
+[data-theme="dark"] .welcome-section p:last-child,
+[data-theme="dark"] .product-section-description,
+[data-theme="dark"] .summary-card p,
+[data-theme="dark"] .panel-heading p,
+[data-theme="dark"] .alert-item p,
+[data-theme="dark"] .product-table-footer { color: #A89C90; }
+[data-theme="dark"] .summary-top { color: #B5A99C; }
+
+/* Banner and cards */
+[data-theme="dark"] .welcome-section { background: #3A322B; }
+[data-theme="dark"] .summary-card,
+[data-theme="dark"] .dashboard-panel { background: #27221E; border-color: #3A332D; }
+[data-theme="dark"] .summary-icon { background: #3A322B; color: #E8DED2; }
+[data-theme="dark"] .alert-icon { background: #4A3326; color: #E3A57F; }
+[data-theme="dark"] .panel-tag,
+[data-theme="dark"] .record-count,
+[data-theme="dark"] .category-badge { background: #3A322B; color: #D8BFA8; }
+[data-theme="dark"] .view-all-link { color: #D8BFA8; }
+
+/* Alerts */
+[data-theme="dark"] .alert-item { border-bottom-color: #3A332D; }
+[data-theme="dark"] .alert-badge,
+[data-theme="dark"] .critical-badge { background: #4A2F29; color: #E8A58F; }
+[data-theme="dark"] .expiry-badge { background: #473C26; color: #E3C37F; }
+
+/* Tables */
+[data-theme="dark"] .table {
+    --bs-table-bg: transparent;
+    --bs-table-color: #D5CBC0;
+    --bs-table-border-color: #3A332D;
+}
+[data-theme="dark"] .activity-table thead th { background: #2E2823; color: #A89C90; border-bottom-color: #3A332D; }
+[data-theme="dark"] .activity-table tbody td { color: #D5CBC0; border-bottom-color: #3A332D; }
+[data-theme="dark"] .product-name-cell { color: #F3EDE6 !important; }
+[data-theme="dark"] .product-sku { color: #A89C90 !important; }
+[data-theme="dark"] .received { background: #26382A; color: #8FC498; }
+[data-theme="dark"] .sold { background: #3A322B; color: #D8BFA8; }
+[data-theme="dark"] .adjusted { background: #473C26; color: #E3C37F; }
+
+/* Buttons in tables */
+[data-theme="dark"] .action-button { background: #27221E; color: #D8BFA8; border-color: #3A332D; }
+[data-theme="dark"] .action-button:hover { background: #3A322B; }
+[data-theme="dark"] .delete-button { color: #E8A58F; }
+[data-theme="dark"] .delete-button:hover { background: #4A2F29; }
+
+/* Forms, search boxes and filters */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select { background-color: #1F1B18; color: #EDE6DE; border-color: #3A332D; }
+[data-theme="dark"] .search-wrapper { background: #1F1B18; border-color: #3A332D; }
+[data-theme="dark"] .search-wrapper input { color: #EDE6DE; }
+[data-theme="dark"] .form-label { color: #D5CBC0; }
+
+/* Pop-up windows (modals) */
+[data-theme="dark"] .modal-content { --bs-modal-bg: #27221E; color: #EDE6DE; }
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer { border-color: #3A332D; }
+
+/* Suppliers */
+[data-theme="dark"] .supplier-card { background: #2E2823; border-color: #3A332D; }
+[data-theme="dark"] .supplier-card ul { color: #B5A99C; }
+[data-theme="dark"] .supplier-avatar { background: #3A322B; color: #E8DED2; }
+
+/* Show/hide password button */
+.password-wrapper {
+    position: relative;          /* lets the button be placed inside this box */
+}
+
+.password-wrapper .form-control {
+    padding-right: 46px;         /* keeps typed text from running under the button */
+}
+
+.password-toggle {
+    position: absolute;          /* floats on top of the input */
+    top: 50%;                    /* halfway down the box... */
+    right: 12px;                 /* ...and 12px from the right edge */
+    transform: translateY(-50%); /* nudges it up by half its own height, so it's centred */
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #766C63;
+    padding: 4px;
+}
+
+.password-toggle:hover {
+    color: #37332F;
+}
+
+/* Mobile menu - hidden on desktop and tablet */
+.mobile-bar,
+.sidebar-overlay {
+    display: none;
+}
+
+@media (max-width: 700px) {
+
+    /* The top bar with the ☰ button */
+    .mobile-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        position: sticky;
+        top: 0;
+        z-index: 900;
+        margin: -24px -15px 18px;
+        padding: 12px 15px;
+        background: #FFFFFF;
+        border-bottom: 1px solid #EAE4DC;
+    }
+
+    .menu-toggle {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #E4DED7;
+        border-radius: 8px;
+        background: #FBF9F6;
+        color: #37332F;
+        font-size: 22px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #37332F;
+        font-family: Georgia, serif;
+        font-size: 19px;
+        text-decoration: none;
+    }
+
+    .mobile-brand img {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    /* The sidebar becomes a drawer parked off the left edge */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 270px;
+        max-width: 85vw;
+        z-index: 1100;
+        padding: 24px 18px;
+        overflow-y: auto;
+        border-right: 1px solid #EAE4DC;
+        border-bottom: none;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: transform 0.28s ease, visibility 0s linear 0.28s;
+    }
+
+    .sidebar.is-open {
+        transform: translateX(0);
+        visibility: visible;
+        box-shadow: 8px 0 30px rgba(0, 0, 0, 0.15);
+        transition: transform 0.28s ease, visibility 0s;
+    }
+
+    /* Inside the drawer: a normal vertical menu again */
+    .sidebar-brand {
+        margin-bottom: 30px;
+    }
+
+    .sidebar-label {
+        display: block;
+    }
+
+    .sidebar-nav {
+        flex-direction: column;
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+
+    .nav-item {
+        font-size: 13px;
+        padding: 13px 12px;
+    }
+
+    .nav-item span {
+        display: inline-block;
+    }
+
+    .sidebar-bottom {
+        display: block;
+        margin-top: auto;
+        padding: 25px 0 0;
+    }
+
+    .sidebar-bottom p,
+    .sidebar-bottom small {
+        display: block;
+    }
+
+    /* The dark area behind the open menu */
+    .sidebar-overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 1050;
+        background: rgba(30, 25, 20, 0.45);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.28s ease;
+    }
+
+    .sidebar-overlay.is-visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+[data-theme="dark"] .mobile-bar {
+    background: #27221E;
+    border-bottom-color: #3A332D;
+}
+
+[data-theme="dark"] .menu-toggle {
+    background: #2E2823;
+    border-color: #3A332D;
+    color: #EDE6DE;
+}
+
+[data-theme="dark"] .mobile-brand {
+    color: #F3EDE6;
+}
+
+/* ==========================================================================================
+   Compact login on phones (so no scrolling is needed)
+   ========================================================================================== */
+
+@media (max-width: 768px) {
+
+    /* Page: use the real visible height of the phone */
+    .login-page {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 12px;
+    }
+
+    /* Remove the 600px minimum height */
+    .login-container {
+        min-height: 0;
+    }
+
+    /* Brand section becomes a small header: logo on the left, text on the right */
+    .login-brand {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        column-gap: 16px;
+        align-items: center;
+        padding: 18px 22px;
+    }
+
+    .login-logo {
+        grid-row: 1 / span 2;      /* logo spans both text rows */
+        width: 64px;
+        height: 64px;
+        margin: 0;
+    }
+
+    .brand-label {
+        margin: 0;
+        font-size: 10px;
+        letter-spacing: 1px;
+        align-self: end;
+    }
+
+    .login-brand h1 {
+        margin: 2px 0 0;
+        font-size: 30px;
+        align-self: start;
+    }
+
+    /* Hide the decorative extras to save height */
+    .brand-description,
+    .brand-decoration {
+        display: none;
+    }
+
+    /* Form section: tighter spacing */
+    .login-form-section {
+        padding: 22px 22px 26px;
+    }
+
+    .login-form h2 {
+        font-size: 24px;
+        margin: 6px 0 4px;
+    }
+
+    .form-description {
+        font-size: 13px;
+        margin-bottom: 16px;
+    }
+
+    .login-form .mb-3 {
+        margin-bottom: 12px !important;   /* Bootstrap uses !important, so we must too */
+    }
+
+    .login-message {
+        margin: 0 0 6px;
+    }
+
+    .login-note {
+        margin-top: 16px;
+    }
+}

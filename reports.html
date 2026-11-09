@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Inventory value reports and stock alerts for BeauStock.">
+    <meta name="author" content="BeauStock">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <title>Reports &amp; Alerts | BeauStock</title>
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- BeauStock styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Dark mode theme -->
+    <script src="js/theme.js"></script>
+
+    <script src="js/menu.js" defer></script>
+
+</head>
+<body class="dashboard-page">
+
+<div class="app-layout">
+
+    <!-- Sidebar navigation (same on every page) -->
+    <aside class="sidebar" id="sidebar">
+        <a href="dashboard.html" class="sidebar-brand">
+            <img src="images/logo.png" alt="BeauStock logo" class="brand-logo-img">
+            <span>BeauStock</span>
+        </a>
+
+        <p class="sidebar-label">MAIN MENU</p>
+
+        <nav class="sidebar-nav">
+            <a href="dashboard.html" class="nav-item"><span>●</span> Dashboard</a>
+            <a href="products.html" class="nav-item"><span>●</span> Product Management</a>
+            <a href="stock.html" class="nav-item"><span>●</span> Stock Management</a>
+            <a href="suppliers.html" class="nav-item"><span>●</span> Suppliers &amp; Orders</a>
+            <a href="reports.html" class="nav-item active"><span>●</span> Reports &amp; Alerts</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <p>BEAUTIFULLY ORGANISED.</p>
+            <small>BeauStock © 2026</small>
+            <button id="themeToggle" class="theme-toggle" type="button">☾ Dark mode</button>
+            <button id="logoutButton" class="logout-button">↪ Log out</button>
+        </div>
+    </aside>
+
+    <!-- Dark area behind the mobile menu (tap it to close) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main content -->
+    <main class="dashboard-main">
+
+        <!-- Mobile top bar: the ☰ button (only visible on phones) -->
+            <div class="mobile-bar">
+                <button type="button" id="menuToggle" class="menu-toggle"
+                        aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+                <a href="dashboard.html" class="mobile-brand">
+                    <img src="images/logo.png" alt=""><span>BeauStock</span>
+                </a>
+            </div>
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">INSIGHTS</p>
+                <h1>Reports &amp; Alerts</h1>
+            </div>
+            <div class="user-profile">
+                <div class="user-avatar">I</div>
+                
+                <div><strong>Izzah</strong>
+                <small>Administrator</small></div>
+            </div>
+        </header>
+
+        <!-- Summary -->
+        <section class="summary-grid">
+            <article class="summary-card">
+                <div class="summary-top"><span>Stock Cost Value</span><span class="summary-icon">RM</span></div>
+                <h3 id="repCost">0</h3>
+                <p>What your stock cost</p>
+            </article>
+            <article class="summary-card">
+                <div class="summary-top"><span>Retail Value</span><span class="summary-icon">RM</span></div>
+                <h3 id="repRetail">0</h3>
+                <p>If everything sells</p>
+            </article>
+            <article class="summary-card">
+                <div class="summary-top"><span>Potential Profit</span><span class="summary-icon">↗</span></div>
+                <h3 id="repProfit">0</h3>
+                <p>Retail minus cost</p>
+            </article>
+            <article class="summary-card">
+                <div class="summary-top"><span>Active Alerts</span><span class="summary-icon alert-icon">!</span></div>
+                <h3 id="repAlerts">0</h3>
+                <p>Need attention</p>
+            </article>
+        </section>
+
+        <!-- Charts -->
+        <section class="report-grid">
+            <article class="dashboard-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Stock Value by Category</h3>
+                        <p>Cost value vs retail value (RM). Hover for details.</p>
+                    </div>
+                    <span class="panel-tag">CHART</span>
+                </div>
+                <div class="chart-container"><canvas id="valueChart"></canvas></div>
+            </article>
+
+            <article class="dashboard-panel">
+                <div class="panel-heading">
+                    <div>
+                        <h3>Stock Health</h3>
+                        <p>How many products are healthy, low or out.</p>
+                    </div>
+                    <span class="panel-tag">CHART</span>
+                </div>
+                <div class="chart-container"><canvas id="healthChart"></canvas></div>
+            </article>
+        </section>
+
+        <!-- Alerts -->
+        <section class="dashboard-panel activity-panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Alerts</h3>
+                    <p>Low stock, out of stock and expiry warnings (within 90 days).</p>
+                </div>
+                <span class="record-count" id="alertCount">0 alerts</span>
+            </div>
+            <div id="alertList"></div>
+        </section>
+
+        <!-- Top products -->
+        <section class="dashboard-panel activity-panel">
+            <div class="panel-heading">
+                <div>
+                    <h3>Most Valuable Stock</h3>
+                    <p>Products ranked by retail value of units on hand.</p>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table activity-table product-table values-table">
+                    <thead>
+                        <tr><th>PRODUCT</th><th>CATEGORY</th><th>UNITS</th><th>COST VALUE</th><th>RETAIL VALUE</th><th>MARGIN</th></tr>
+                    </thead>
+                    <tbody id="valueTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer class="dashboard-footer">
+            <span>© 2026 BeauStock</span>
+            <span>Beautifully organised. Always in stock.</span>
+        </footer>
+
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/data.js"></script>
+<script src="js/reports.js"></script>
+</body>
+</html>
