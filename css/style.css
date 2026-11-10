@@ -1724,3 +1724,21 @@ body {
         margin-top: 16px;
     }
 }
+
+/* Supplier card: remove button area */
+.supplier-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #ECE6DF;
+}
+
+/* Let the "no suppliers" message use the full width of the grid */
+.supplier-grid .empty-message {
+    grid-column: 1 / -1;
+}
+
+[data-theme="dark"] .supplier-actions {
+    border-top-color: #3A332D;
+}

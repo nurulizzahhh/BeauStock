@@ -108,8 +108,12 @@
                     <h3>Our Suppliers</h3>
                     <p>Who supplies your beauty products.</p>
                 </div>
-                <span class="panel-tag">DIRECTORY</span>
+                <div class="panel-actions">
+                    <span class="panel-tag">DIRECTORY</span>
+                    <button class="btn btn-brown" data-bs-toggle="modal" data-bs-target="#supplierModal">+ Add Supplier</button>
+                </div>
             </div>
+            <p id="supplierMessage" class="form-message" role="alert"></p>
             <div class="supplier-grid" id="supplierGrid"></div>
         </section>
 
@@ -159,6 +163,52 @@
         </footer>
 
     </main>
+</div>
+
+<!-- Add supplier modal -->
+<div class="modal fade" id="supplierModal" tabindex="-1" aria-labelledby="supplierModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content stock-modal-content">
+            <div class="modal-header">
+                <div>
+                    <p class="eyebrow">SUPPLIER DETAILS</p>
+                    <h2 class="modal-title fs-5" id="supplierModalTitle">Add Supplier</h2>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="supplierForm">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="supplierName" class="form-label">Supplier name *</label>
+                        <input type="text" id="supplierName" class="form-control" required maxlength="80" placeholder="e.g. Bloom Cosmetics">
+                    </div>
+                    <div class="mb-3">
+                        <label for="supplierCategory" class="form-label">What they supply</label>
+                        <input type="text" id="supplierCategory" class="form-control" maxlength="60" placeholder="e.g. Skincare">
+                    </div>
+                    <div class="mb-3">
+                        <label for="supplierContact" class="form-label">Contact person</label>
+                        <input type="text" id="supplierContact" class="form-control" maxlength="60" placeholder="e.g. Aina Sofea">
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="supplierPhone" class="form-label">Phone</label>
+                            <input type="tel" id="supplierPhone" class="form-control" maxlength="20" placeholder="012-345 6789">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="supplierEmail" class="form-label">Email</label>
+                            <input type="email" id="supplierEmail" class="form-control" maxlength="80" placeholder="name@company.com">
+                        </div>
+                    </div>
+                    <p id="supplierFormMessage" class="form-message" role="alert"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-brown">Save Supplier</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <!-- New order modal -->
