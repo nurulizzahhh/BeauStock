@@ -5,8 +5,8 @@
 BeauStock is a front-end web application prototype for managing a small beauty shop's inventory: products, stock levels, suppliers, purchase orders and reports. It uses a nude / white / brown design with a light and dark mode. No database is needed: data is stored in the browser (localStorage).
 
 ## Live Demo
-- Live site: `https://YOUR-USERNAME.github.io/YOUR-REPOSITORY/`
-- Repository: `https://github.com/YOUR-USERNAME/YOUR-REPOSITORY`
+- Live site: `https://nurulizzahhh.github.io/BeauStock/`
+- Repository: `https://github.com/nurulizzahhh/BeauStock.git`
 
 ## How to Test the Login
 The demo credentials are already filled in on the login page, so just click **Sign In**.
