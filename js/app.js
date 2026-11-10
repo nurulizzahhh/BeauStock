@@ -50,23 +50,36 @@ document.getElementById("dashAlerts").innerHTML = alertRows.length
     ? alertRows.slice(0, 5).join("")
     : `<p class="alert-list-empty">All good. Nothing needs attention.</p>`;
 
-// ----- Recent stock activity (latest 5 movements) -----
-const recent = movements.slice(0, 5);
+// ----- Recent stock activity (5 per page, Previous / Next) -----
+const ACTIVITY_PAGE_SIZE = 5;
+let activityPage = 1;
 
-document.getElementById("dashActivity").innerHTML = recent.length
-    ? recent.map(m => {
-        const isIn = m.type === "in";
-        const when = new Date(m.date);
-        const dateText = Number.isNaN(when.getTime()) ? "—" : when.toLocaleDateString("en-MY");
-        return `<tr>
-            <td>${esc(m.productName)}</td>
-            <td>${esc(m.reason)}</td>
-            <td>${isIn ? "+" : "−"}${Number(m.quantity)} units</td>
-            <td>${esc(dateText)}</td>
-            <td><span class="status-badge ${isIn ? "received" : "sold"}">${isIn ? "Stock In" : "Stock Out"}</span></td>
-        </tr>`;
-    }).join("")
-    : `<tr><td colspan="5" class="text-center text-muted py-4">No stock movements yet.</td></tr>`;
+function renderActivity() {
+    const info = BeauPager.slice(movements, activityPage, ACTIVITY_PAGE_SIZE);
+    activityPage = info.page;
+
+    document.getElementById("dashActivity").innerHTML = info.items.length
+        ? info.items.map(m => {
+            const isIn = m.type === "in";
+            const when = new Date(m.date);
+            const dateText = Number.isNaN(when.getTime()) ? "—" : when.toLocaleDateString("en-MY");
+            return `<tr>
+                <td>${esc(m.productName)}</td>
+                <td>${esc(m.reason)}</td>
+                <td>${isIn ? "+" : "−"}${Number(m.quantity)} units</td>
+                <td>${esc(dateText)}</td>
+                <td><span class="status-badge ${isIn ? "received" : "sold"}">${isIn ? "Stock In" : "Stock Out"}</span></td>
+            </tr>`;
+        }).join("")
+        : `<tr><td colspan="5" class="text-center text-muted py-4">No stock movements yet.</td></tr>`;
+
+    BeauPager.render(document.getElementById("activityPager"), info, function (page) {
+        activityPage = page;
+        renderActivity();
+    });
+}
+
+renderActivity();
 
 // ----- Category chart: units on hand per category -----
 const unitsByCategory = {};
@@ -104,8 +117,3 @@ new Chart(document.getElementById("categoryChart"), {
     }
 });
 
-// Log out
-document.getElementById("logoutButton").addEventListener("click", function () {
-    sessionStorage.removeItem("beauStockLoggedIn");
-    window.location.href = "index.html";
-});

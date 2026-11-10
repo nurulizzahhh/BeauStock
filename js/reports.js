@@ -91,18 +91,33 @@ const ranked = [...products]
     .map(p => ({ ...p, retail: p.quantity * p.price, cost: p.quantity * p.cost }))
     .sort((a, b) => b.retail - a.retail);
 
-document.getElementById("valueTableBody").innerHTML = ranked.map(p => {
-    const margin = p.retail > 0 ? Math.round(((p.retail - p.cost) / p.retail) * 100) : 0;
-    return `
-        <tr>
-            <td class="product-name-cell">${esc(p.name)}</td>
-            <td><span class="category-badge">${esc(p.category)}</span></td>
-            <td>${p.quantity}</td>
-            <td>${rm(p.cost)}</td>
-            <td>${rm(p.retail)}</td>
-            <td>${margin}%</td>
-        </tr>`;
-}).join("");
+const VALUE_PAGE_SIZE = 5;
+let valuePage = 1;
+
+function renderValueTable() {
+    const info = BeauPager.slice(ranked, valuePage, VALUE_PAGE_SIZE);
+    valuePage = info.page;
+
+    document.getElementById("valueTableBody").innerHTML = info.items.map(p => {
+        const margin = p.retail > 0 ? Math.round(((p.retail - p.cost) / p.retail) * 100) : 0;
+        return `
+            <tr>
+                <td class="product-name-cell">${esc(p.name)}</td>
+                <td><span class="category-badge">${esc(p.category)}</span></td>
+                <td>${p.quantity}</td>
+                <td>${rm(p.cost)}</td>
+                <td>${rm(p.retail)}</td>
+                <td>${margin}%</td>
+            </tr>`;
+    }).join("");
+
+    BeauPager.render(document.getElementById("valuePager"), info, function (page) {
+        valuePage = page;
+        renderValueTable();
+    });
+}
+
+renderValueTable();
 
 // ----- Charts (Chart.js) -----
 // Chart colours for the current theme
@@ -161,8 +176,3 @@ new Chart(document.getElementById("healthChart"), {
     }
 });
 
-// Log out
-document.getElementById("logoutButton").addEventListener("click", function () {
-    sessionStorage.removeItem("beauStockLoggedIn");
-    window.location.href = "index.html";
-});

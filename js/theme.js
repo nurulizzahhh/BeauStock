@@ -19,8 +19,13 @@
         const button = document.getElementById("themeToggle");
         if (!button) return;
 
+        // Icon + text. On phones CSS hides the text and keeps only the icon.
         function updateLabel() {
-            button.textContent = theme === "dark" ? "☀ Light mode" : "☾ Dark mode";
+            const dark = theme === "dark";
+            button.innerHTML =
+                '<span class="theme-icon" aria-hidden="true">' + (dark ? "☀" : "☾") + '</span>' +
+                '<span class="theme-label"> ' + (dark ? "Light mode" : "Dark mode") + '</span>';
+            button.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
         }
         updateLabel();
 

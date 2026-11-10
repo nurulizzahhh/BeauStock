@@ -22,19 +22,22 @@ The demo credentials are already filled in on the login page, so just click **Si
 
 ## Features
 - **Login page**: hardcoded demo credentials, error feedback, show/hide password
-- **Responsive sidebar navigation** on every page (becomes a scrolling menu on mobile, with Log out kept visible)
-- **Dark mode**: toggle in the sidebar, choice is remembered
+- **Fixed layout**: the sidebar and a top bar (page title, dark mode button, admin profile) stay on screen while only the content scrolls
+- **Responsive navigation**: on mobile the sidebar is hidden and slides in when the ☰ button is tapped
+- **Dark mode**: toggle in the top bar next to the admin profile, choice is remembered
 - **Dashboard**: summary cards, stock-by-category doughnut chart, live stock alerts, recent stock activity
-- **Product Management**: table with search, category and stock filters; add, edit and delete; supplier chosen from the supplier list
-- **Stock Management**: stock levels table, record Stock In / Stock Out, movement history with filter
-- **Suppliers & Orders**: supplier card grid, purchase order table with search and filter, create orders, "Receive" adds stock automatically
-- **Reports & Alerts**: stock value chart (cost vs retail), stock health chart, low / out of stock / expiry alerts, most valuable stock table
+- **Product Management**: paged table with search, searchable category and stock filters (Select2); add, edit and delete; supplier chosen from the supplier list
+- **Stock Management**: paged stock levels table, record Stock In / Stock Out, paged movement history with searchable filters
+- **Suppliers & Orders**: paged supplier cards, add and remove suppliers (all fields required and validated), paged purchase order table with search and filter, create orders, "Receive" adds stock automatically
+- **Reports & Alerts**: stock value chart (cost vs retail), stock health chart, low / out of stock / expiry alerts, paged most valuable stock table
+- **Pagination**: Previous / Next buttons on every long list
 - **Shared data layer** (`js/data.js`) so every page shows matching numbers
 - Footer, page titles, meta tags and code comments on every page
 
 ## Frameworks / Libraries
 - Bootstrap 5.3 (layout, modals, tables, forms)
 - Chart.js (interactive charts with hover tooltips)
+- jQuery and Select2 (searchable dropdown filters)
 - Vanilla JavaScript, HTML5, CSS3
 
 ## Project Structure
@@ -53,6 +56,9 @@ BeauStock/
 └── js/
     ├── data.js       Shared data (localStorage)
     ├── theme.js      Light / dark mode
+    ├── menu.js       Log out + mobile ☰ menu
+    ├── pager.js      Previous / Next pagination
+    ├── select-filters.js  Select2 helper
     ├── auth.js       Login
     ├── app.js        Dashboard
     ├── products.js   Products

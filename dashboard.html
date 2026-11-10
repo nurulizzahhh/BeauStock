@@ -45,7 +45,6 @@
             <div class="sidebar-bottom">
                 <p>BEAUTIFULLY ORGANISED.</p>
                 <small>BeauStock © 2026</small>
-                <button id="themeToggle" class="theme-toggle" type="button">☾ Dark mode</button>
                 <button id="logoutButton" class="logout-button">↪ Log out</button>
             </div>
         </aside>
@@ -56,26 +55,27 @@
         <!-- Main dashboard content -->
         <main class="dashboard-main">
 
-            <!-- Mobile top bar: the ☰ button (only visible on phones) -->
-            <div class="mobile-bar">
-                <button type="button" id="menuToggle" class="menu-toggle"
-                        aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
-                <a href="dashboard.html" class="mobile-brand">
-                    <img src="images/logo.png" alt=""><span>BeauStock</span>
-                </a>
-            </div>
-
+            <!-- Sticky top bar: stays on screen while the content scrolls -->
             <header class="topbar">
-                <div>
-                    <p class="eyebrow">OVERVIEW</p>
-                    <h1>Dashboard</h1>
+                <div class="topbar-left">
+                    <button type="button" id="menuToggle" class="menu-toggle"
+                            aria-label="Open menu" aria-expanded="false" aria-controls="sidebar">☰</button>
+                    <div class="topbar-title">
+                        <p class="eyebrow">OVERVIEW</p>
+                        <h1>Dashboard</h1>
+                    </div>
                 </div>
 
-                <div class="user-profile">
-                    <div class="user-avatar">I</div>
-                    <div>
-                        <strong>Izzah</strong>
-                        <small>Administrator</small>
+                <div class="topbar-right">
+                    <button id="themeToggle" class="theme-toggle" type="button" aria-label="Switch to dark mode">
+                        <span class="theme-icon" aria-hidden="true">☾</span><span class="theme-label"> Dark mode</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">I</div>
+                        <div class="user-info">
+                            <strong>Izzah</strong>
+                            <small>Administrator</small>
+                        </div>
                     </div>
                 </div>
             </header>
@@ -184,6 +184,7 @@
                         <tbody id="dashActivity"></tbody>
                     </table>
                 </div>
+                <div class="pager" id="activityPager"></div>
             </section>
 
             <footer class="dashboard-footer">
@@ -199,6 +200,7 @@
 
     <!-- BeauStock functionality -->
     <script src="js/data.js"></script>
+<script src="js/pager.js"></script>
     <script src="js/app.js"></script>
 
 </body>

@@ -11,6 +11,12 @@ const esc = BeauData.escapeHTML;
 let orders = BeauData.getOrders();
 let suppliers = BeauData.getSuppliers();
 
+// Pagination: 4 supplier cards and 5 orders per page
+const SUPPLIERS_PAGE_SIZE = 4;
+const ORDERS_PAGE_SIZE = 5;
+let supplierPage = 1;
+let orderPage = 1;
+
 const orderModalEl = document.getElementById("orderModal");
 const orderModal = bootstrap.Modal.getOrCreateInstance(orderModalEl);
 const orderForm = document.getElementById("orderForm");
@@ -27,31 +33,36 @@ function renderSummary() {
         orders.filter(o => o.status === "Delivered").length;
 }
 
-// ----- Supplier cards (grid) -----
+// ----- Supplier cards (grid, 4 per page) -----
 function renderSuppliers() {
     const grid = document.getElementById("supplierGrid");
+    const info = BeauPager.slice(suppliers, supplierPage, SUPPLIERS_PAGE_SIZE);
+    supplierPage = info.page;
 
-    // Nothing to show
     if (suppliers.length === 0) {
         grid.innerHTML = `<p class="empty-message">No suppliers yet. Click "+ Add Supplier" to add one.</p>`;
-        return;
+    } else {
+        grid.innerHTML = info.items.map(s => `
+            <article class="supplier-card">
+                <div class="supplier-avatar">${esc(s.name.charAt(0))}</div>
+                <h4>${esc(s.name)}</h4>
+                <p class="supplier-category">${esc(s.category)}</p>
+                <ul>
+                    ${s.contact ? `<li>👤 ${esc(s.contact)}</li>` : ""}
+                    ${s.phone ? `<li>☎ ${esc(s.phone)}</li>` : ""}
+                    ${s.email ? `<li>✉ ${esc(s.email)}</li>` : ""}
+                </ul>
+                <div class="supplier-actions">
+                    <button type="button" class="action-button delete-button"
+                            data-action="delete-supplier" data-id="${esc(s.id)}">Remove</button>
+                </div>
+            </article>`).join("");
     }
 
-    grid.innerHTML = suppliers.map(s => `
-        <article class="supplier-card">
-            <div class="supplier-avatar">${esc(s.name.charAt(0))}</div>
-            <h4>${esc(s.name)}</h4>
-            <p class="supplier-category">${esc(s.category)}</p>
-            <ul>
-                ${s.contact ? `<li>👤 ${esc(s.contact)}</li>` : ""}
-                ${s.phone ? `<li>☎ ${esc(s.phone)}</li>` : ""}
-                ${s.email ? `<li>✉ ${esc(s.email)}</li>` : ""}
-            </ul>
-            <div class="supplier-actions">
-                <button type="button" class="action-button delete-button"
-                        data-action="delete-supplier" data-id="${esc(s.id)}">Remove</button>
-            </div>
-        </article>`).join("");
+    BeauPager.render(document.getElementById("supplierPager"), info, function (page) {
+        supplierPage = page;
+        renderSuppliers();
+    });
 }
 
 // ----- Orders table -----
@@ -64,7 +75,10 @@ function renderOrders() {
         return text.includes(search) && (status === "all" || o.status === status);
     });
 
-    document.getElementById("orderTableBody").innerHTML = list.map(o => `
+    const pageInfo = BeauPager.slice(list, orderPage, ORDERS_PAGE_SIZE);
+    orderPage = pageInfo.page;
+
+    document.getElementById("orderTableBody").innerHTML = pageInfo.items.map(o => `
         <tr>
             <td><strong>${esc(o.id)}</strong></td>
             <td>${esc(o.supplier)}</td>
@@ -82,6 +96,12 @@ function renderOrders() {
     document.getElementById("orderCount").textContent =
         `${list.length} order${list.length === 1 ? "" : "s"}`;
     document.getElementById("orderEmpty").hidden = list.length > 0;
+
+    BeauPager.render(document.getElementById("orderPager"), pageInfo, function (page) {
+        orderPage = page;
+        renderOrders();
+    });
+
     renderSummary();
 }
 
@@ -168,6 +188,7 @@ orderForm.addEventListener("submit", function (event) {
 
     BeauData.saveOrders(orders);
     orderModal.hide();
+    orderPage = 1;             // show the new order at the top
     renderOrders();
 });
 
@@ -177,14 +198,20 @@ orderModalEl.addEventListener("hidden.bs.modal", function () {
     updateOrderPreview();
 });
 
-document.getElementById("orderSearch").addEventListener("input", renderOrders);
-document.getElementById("orderStatusFilter").addEventListener("change", renderOrders);
+const orderStatusFilter = document.getElementById("orderStatusFilter");
 
-// Log out
-document.getElementById("logoutButton").addEventListener("click", function () {
-    sessionStorage.removeItem("beauStockLoggedIn");
-    window.location.href = "index.html";
-});
+// A new search or filter always starts again from page 1
+function applyOrderFilters() {
+    orderPage = 1;
+    renderOrders();
+}
+
+document.getElementById("orderSearch").addEventListener("input", applyOrderFilters);
+
+// Searchable Select2 dropdown (falls back to a normal dropdown if Select2 is missing)
+BeauSelect.enhance(orderStatusFilter);
+BeauSelect.onChange(orderStatusFilter, applyOrderFilters);
+
 
 // ----- Add supplier -----
 const supplierModalEl = document.getElementById("supplierModal");
@@ -203,8 +230,21 @@ supplierForm.addEventListener("submit", function (event) {
     const phone = document.getElementById("supplierPhone").value.trim();
     const email = document.getElementById("supplierEmail").value.trim();
 
-    if (!name) {
-        supplierFormMessage.textContent = "Please enter the supplier name.";
+    // Every field must be filled in
+    if (!name || !category || !contact || !phone || !email) {
+        supplierFormMessage.textContent = "Please fill in all the fields.";
+        return;
+    }
+
+    // Phone: digits, spaces, + and - only (7 to 20 characters)
+    if (!/^[0-9+\-\s]{7,20}$/.test(phone)) {
+        supplierFormMessage.textContent = "Please enter a valid phone number, e.g. 012-345 6789.";
+        return;
+    }
+
+    // Email: something@something.something
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        supplierFormMessage.textContent = "Please enter a valid email address.";
         return;
     }
 
@@ -217,6 +257,7 @@ supplierForm.addEventListener("submit", function (event) {
 
     suppliers.push({ id: "S" + Date.now(), name, contact, phone, email, category });
     BeauData.saveSuppliers(suppliers);
+    supplierPage = Math.ceil(suppliers.length / SUPPLIERS_PAGE_SIZE);   // jump to the page with the new card
 
     supplierMessage.textContent = "";
     supplierModal.hide();

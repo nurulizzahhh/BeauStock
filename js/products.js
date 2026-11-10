@@ -11,6 +11,10 @@ if (sessionStorage.getItem("beauStockLoggedIn") !== "true") {
 // Products come from the shared data layer (js/data.js)
 let products = BeauData.getProducts();
 
+// Pagination: 5 products per page
+const PRODUCTS_PAGE_SIZE = 5;
+let productPage = 1;
+
 const productTableBody = document.getElementById("productTableBody");
 const searchInput = document.getElementById("searchInput");
 const categoryFilter = document.getElementById("categoryFilter");
@@ -127,7 +131,11 @@ function renderProducts() {
         return matchesSearch && matchesCategory && matchesStock;
     });
 
-    productTableBody.innerHTML = filteredProducts.map(product => {
+    // Only the products for the current page
+    const pageInfo = BeauPager.slice(filteredProducts, productPage, PRODUCTS_PAGE_SIZE);
+    productPage = pageInfo.page;
+
+    productTableBody.innerHTML = pageInfo.items.map(product => {
         const status = getStockStatus(product);
 
         return `
@@ -182,8 +190,10 @@ function renderProducts() {
     document.getElementById("emptyMessage").hidden =
         filteredProducts.length !== 0;
 
-    document.getElementById("resultCount").textContent =
-        `Showing ${filteredProducts.length} of ${products.length} products`;
+    BeauPager.render(document.getElementById("productPager"), pageInfo, function (page) {
+        productPage = page;
+        renderProducts();
+    });
 
     updateSummary();
 }
@@ -309,15 +319,20 @@ productTableBody.addEventListener("click", function (event) {
 });
 
 // Search and filter events
-searchInput.addEventListener("input", renderProducts);
-categoryFilter.addEventListener("change", renderProducts);
-stockFilter.addEventListener("change", renderProducts);
+// A new search or filter always starts again from page 1
+function applyFilters() {
+    productPage = 1;
+    renderProducts();
+}
 
-// Log out
-document.getElementById("logoutButton").addEventListener("click", function () {
-    sessionStorage.removeItem("beauStockLoggedIn");
-    window.location.href = "index.html";
-});
+searchInput.addEventListener("input", applyFilters);
+
+// Searchable Select2 dropdowns (falls back to normal dropdowns if Select2 is missing)
+BeauSelect.enhance(categoryFilter);
+BeauSelect.enhance(stockFilter);
+BeauSelect.onChange(categoryFilter, applyFilters);
+BeauSelect.onChange(stockFilter, applyFilters);
+
 
 // Clear form messages when the modal closes
 productModalElement.addEventListener("hidden.bs.modal", resetProductForm);

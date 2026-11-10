@@ -9,6 +9,11 @@ const stockForm = document.getElementById("stockForm");
 const stockModalElement = document.getElementById("stockModal");
 const stockModal = bootstrap.Modal.getOrCreateInstance(stockModalElement);
 
+// Pagination: 5 rows per page in each table
+const STOCK_PAGE_SIZE = 5;
+let stockPage = 1;
+let movementPage = 1;
+
 // Data comes from the shared data layer (js/data.js)
 const getProducts = () => BeauData.getProducts();
 const saveProducts = (list) => BeauData.saveProducts(list);
@@ -93,7 +98,10 @@ function renderStockTable() {
     // ==============================================================================================================================
     // Current Stock Levels Table 
     // ==============================================================================================================================
-    stockTableBody.innerHTML = filteredProducts.map(product => {
+    const pageInfo = BeauPager.slice(filteredProducts, stockPage, STOCK_PAGE_SIZE);
+    stockPage = pageInfo.page;
+
+    stockTableBody.innerHTML = pageInfo.items.map(product => {
         const status = getStockStatus(product);
 
         return `
@@ -121,6 +129,11 @@ function renderStockTable() {
 
     document.getElementById("stockEmptyMessage").hidden =
         filteredProducts.length > 0;
+
+    BeauPager.render(document.getElementById("stockPager"), pageInfo, function (page) {
+        stockPage = page;
+        renderStockTable();
+    });
 }
 
 function populateProductOptions() {
@@ -152,7 +165,10 @@ function renderMovementHistory() {
         filter === "all" || movement.type === filter
     );
 
-    movementTableBody.innerHTML = filteredMovements.map(movement => {
+    const pageInfo = BeauPager.slice(filteredMovements, movementPage, STOCK_PAGE_SIZE);
+    movementPage = pageInfo.page;
+
+    movementTableBody.innerHTML = pageInfo.items.map(movement => {
         const date = new Date(movement.date);
         const dateText = Number.isNaN(date.getTime())
             ? "Unknown date"
@@ -181,6 +197,11 @@ function renderMovementHistory() {
 
     document.getElementById("movementEmptyMessage").hidden =
         filteredMovements.length > 0;
+
+    BeauPager.render(document.getElementById("movementPager"), pageInfo, function (page) {
+        movementPage = page;
+        renderMovementHistory();
+    });
 }
 
 function renderStockPage() {
@@ -245,17 +266,32 @@ stockForm.addEventListener("submit", function (event) {
     stockForm.reset();
     message.textContent = "";
     stockModal.hide();
+    movementPage = 1;          // show the new movement at the top
     renderStockPage();
 });
 
-document.getElementById("stockSearch").addEventListener("input", renderStockTable);
-document.getElementById("stockStatusFilter").addEventListener("change", renderStockTable);
-document.getElementById("movementFilter").addEventListener("change", renderMovementHistory);
+const stockStatusFilter = document.getElementById("stockStatusFilter");
+const movementFilter = document.getElementById("movementFilter");
 
-document.getElementById("logoutButton").addEventListener("click", function () {
-    sessionStorage.removeItem("beauStockLoggedIn");
-    window.location.href = "index.html";
-});
+// A new search or filter always starts again from page 1
+function applyStockFilters() {
+    stockPage = 1;
+    renderStockTable();
+}
+
+function applyMovementFilter() {
+    movementPage = 1;
+    renderMovementHistory();
+}
+
+document.getElementById("stockSearch").addEventListener("input", applyStockFilters);
+
+// Searchable Select2 dropdowns (falls back to normal dropdowns if Select2 is missing)
+BeauSelect.enhance(stockStatusFilter);
+BeauSelect.enhance(movementFilter, { width: "200px" });
+BeauSelect.onChange(stockStatusFilter, applyStockFilters);
+BeauSelect.onChange(movementFilter, applyMovementFilter);
+
 
 stockModalElement.addEventListener("hidden.bs.modal", function () {
     stockForm.reset();
