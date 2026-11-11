@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="BeauStock stock management: track stock levels and movements.">
     <meta name="author" content="BeauStock">
-    <meta name="keywords" content="stock management, stock movement, low-stock monitoring">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <title>Stock Management | BeauStock</title>
 
@@ -129,6 +128,8 @@
                     <option value="low">Low Stock</option>
                     <option value="out">Out of Stock</option>
                 </select>
+
+                <button type="button" id="resetStockFilters" class="btn-reset">Reset</button>
             </div>
 
             <div class="table-responsive">
@@ -159,11 +160,14 @@
                     <h3>Stock Movement History</h3>
                     <p>A record of stock received and stock removed.</p>
                 </div>
-                <select id="movementFilter" class="form-select filter-select">
+                <div class="panel-actions">
+                    <select id="movementFilter" class="form-select filter-select">
                     <option value="all">All movements</option>
                     <option value="in">Stock In</option>
                     <option value="out">Stock Out</option>
                 </select>
+                    <button type="button" id="resetMovementFilter" class="btn-reset">Reset</button>
+                </div>
             </div>
 
             <div class="table-responsive">

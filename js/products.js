@@ -333,6 +333,14 @@ BeauSelect.enhance(stockFilter);
 BeauSelect.onChange(categoryFilter, applyFilters);
 BeauSelect.onChange(stockFilter, applyFilters);
 
+// Reset button: clear the search box and put both dropdowns back to "All"
+document.getElementById("resetFilters").addEventListener("click", function () {
+    searchInput.value = "";
+    BeauSelect.reset(categoryFilter, "");
+    BeauSelect.reset(stockFilter, "");
+    applyFilters();
+});
+
 
 // Clear form messages when the modal closes
 productModalElement.addEventListener("hidden.bs.modal", resetProductForm);

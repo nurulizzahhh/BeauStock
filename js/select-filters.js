@@ -31,5 +31,15 @@ const BeauSelect = (function () {
         }
     }
 
-    return { enhance: enhance, onChange: onChange };
+    // Put a dropdown back to a value WITHOUT running the filter
+    // (used by the Reset buttons, which run the filter once at the end)
+    function reset(select, value) {
+        if (!select) return;
+        select.value = value;
+        if (available()) {
+            window.jQuery(select).trigger("change.select2");   // refresh only the Select2 display
+        }
+    }
+
+    return { enhance: enhance, onChange: onChange, reset: reset };
 })();

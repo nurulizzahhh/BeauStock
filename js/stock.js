@@ -292,6 +292,18 @@ BeauSelect.enhance(movementFilter, { width: "200px" });
 BeauSelect.onChange(stockStatusFilter, applyStockFilters);
 BeauSelect.onChange(movementFilter, applyMovementFilter);
 
+// Reset buttons: back to "show everything" from page 1
+document.getElementById("resetStockFilters").addEventListener("click", function () {
+    document.getElementById("stockSearch").value = "";
+    BeauSelect.reset(stockStatusFilter, "all");
+    applyStockFilters();
+});
+
+document.getElementById("resetMovementFilter").addEventListener("click", function () {
+    BeauSelect.reset(movementFilter, "all");
+    applyMovementFilter();
+});
+
 
 stockModalElement.addEventListener("hidden.bs.modal", function () {
     stockForm.reset();

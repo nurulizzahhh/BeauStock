@@ -212,6 +212,13 @@ document.getElementById("orderSearch").addEventListener("input", applyOrderFilte
 BeauSelect.enhance(orderStatusFilter);
 BeauSelect.onChange(orderStatusFilter, applyOrderFilters);
 
+// Reset button: clear the search box and show all statuses again
+document.getElementById("resetOrderFilters").addEventListener("click", function () {
+    document.getElementById("orderSearch").value = "";
+    BeauSelect.reset(orderStatusFilter, "all");
+    applyOrderFilters();
+});
+
 
 // ----- Add supplier -----
 const supplierModalEl = document.getElementById("supplierModal");

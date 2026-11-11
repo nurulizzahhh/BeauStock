@@ -2033,3 +2033,53 @@ body {
     background: #332C26;
     color: #F3EDE6;
 }
+
+
+/* ==========================================================================================
+   RESET FILTERS button (next to the search box and the dropdown filters)
+   ========================================================================================== */
+
+.product-filters {
+    grid-template-columns: 2fr 1fr 1fr auto;
+}
+
+.table-filters {
+    grid-template-columns: 2fr 1fr auto;
+}
+
+.btn-reset {
+    height: 44px;
+    padding: 0 18px;
+    border: 1px solid #E4DED7;
+    border-radius: 8px;
+    background: #FBF9F6;
+    color: #665347;
+    font-size: 12px;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.btn-reset:hover {
+    background: #F0E9E1;
+}
+
+[data-theme="dark"] .btn-reset {
+    background: #2E2823;
+    border-color: #3A332D;
+    color: #D8BFA8;
+}
+
+[data-theme="dark"] .btn-reset:hover {
+    background: #3A322B;
+}
+
+@media (max-width: 700px) {
+    .product-filters,
+    .table-filters {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-reset {
+        width: 100%;
+    }
+}
